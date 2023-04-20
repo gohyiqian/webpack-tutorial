@@ -3,13 +3,36 @@
 - To run webpack: `npx webpack`. This will generate a `main.js` file under `dist` folder.
 - To se more options: `npx webpack --stats detailed`
 
-## Asset Modules
+## Asset Modules Type
 
 Refers to various kinds of images, fonts or plain text files.
 
-1. `asset/resource` - larger sizes images, text files
-2. `asset/inline` - asset in line module, SVG are injected into JS bundle as the date URI and you can use asset inline
-3. `asset/source`
+1. `asset/resource` - will duplicate the asset or image into `dist` folder and reference as path directory
+2. `asset/inline` - asset in line module, asset or image is injected into JS bundle as the data URI (base 64) and inject it directly into the main JS bundle
+3. `asset` - webpack will decide if the asset is a `asset/resource`(if asset size > 8kB) or `asset/inline` (if asset size < 8kB) based on image size, can be configured.
+4. `asset/source` - import a text file into image src
+
+We can modify the size:
+
+```js
+module: {
+  rules: [
+    {
+      test: /\.(png|jpg)$/,
+      type: 'asset',
+      parser: {
+        dataUrlCondition: {
+          maxSize: 3 * 1024, // 3 kilobytes
+        },
+      },
+    },
+    {
+      test: /\.txt/,
+      type: 'asset/source',
+    },
+  ],
+},
+```
 
 ## Branches
 
