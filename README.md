@@ -73,8 +73,14 @@ module: {
 
 ## Extrace CSS into a separate Bundle using `mini-css-extract-plugin`
 
-```js
+After `npm run build `, we will see `style.css` being created and we need to reference this in our html `<link rel="stylesheet" href="./dist/styles.css" />`
 
+```js
+plugins: [
+  new MiniCssExtractPlugin({
+    filename: 'styles.css',
+  }),
+],
 ```
 
 ## Branches
