@@ -1,5 +1,7 @@
 ## Overview
 
+At its core, webpack is a `static module bundler` for modern JavaScript applications. When webpack processes your application, it internally builds a dependency graph from one or more entry points and then combines every module your project needs into one or more bundles, which are static assets to serve your content from.
+
 - To run webpack: `npx webpack`. This will generate a `main.js` file under `dist` folder.
 - To se more options: `npx webpack --stats detailed`
 
@@ -32,6 +34,47 @@ module: {
     },
   ],
 },
+```
+
+## Webpack Loaders
+
+- Out of the box, webpack `only understands JavaScript and JSON files`.
+- Loaders allow webpack to process other types of files and convert them into valid modules that can be consumed by your application and added to the dependency graph.
+
+```js
+  {
+    test: /\.css$/,
+    use: ['style-loader', 'css-loader'],
+  },
+  {
+    test: /\.scss$/,
+    //webpack will read the loader from right to left
+    use: ['style-loader', 'css-loader', 'sass-loader'],
+  },
+```
+
+## Babel
+
+- javascript compiler
+
+```js
+  {
+    test: /\.js$/,
+    exclude: /node_modules/,
+    use: {
+      loader: 'babel-loader',
+      options: {
+        presets: ['@babel/env'],
+        plugins: ['@babel/plugin-proposal-class-properties'],
+      },
+    },
+  },
+```
+
+## Extrace CSS into a separate Bundle using `mini-css-extract-plugin`
+
+```js
+
 ```
 
 ## Branches
