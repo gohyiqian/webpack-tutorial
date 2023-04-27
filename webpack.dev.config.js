@@ -3,9 +3,13 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: './src/index.js',
+  // entry: './src/index.js',
+  entry: {
+    'hello-world-page': './src/hello-world-page.js',
+    'kiwi-page': './src/kiwi-page.js',
+  },
   output: {
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
     path: path.resolve(__dirname, './dist'),
     publicPath: '',
   },
@@ -63,9 +67,20 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      title: 'Kenji App',
+      filename: 'hello-world-page.html',
+      chunks: ['hello-world-page'],
+      title: 'Hello world',
+      description: 'Hello World',
       template: 'src/index.hbs',
-      description: 'some description',
+      minify: false,
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'kiwi-page.html',
+      chunks: ['kiwi-page'],
+      title: 'Kiwi',
+      description: 'Kiwi',
+      template: 'src/index.hbs',
+      minify: false,
     }),
   ],
 };
