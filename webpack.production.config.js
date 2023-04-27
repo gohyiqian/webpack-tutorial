@@ -6,8 +6,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   // entry: './src/index.js',
   entry: {
-    'hello-world': './src/hello-world.js',
-    kiwi: './src/kiwi.js',
+    'hello-world-page': './src/hello-world-page.js',
+    'kiwi-page': './src/kiwi-page.js',
   },
   output: {
     filename: '[name].[contenthash].js',
@@ -15,6 +15,12 @@ module.exports = {
     publicPath: '',
   },
   mode: 'production',
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      minSize: 3000,
+    },
+  },
   module: {
     rules: [
       {
@@ -61,16 +67,16 @@ module.exports = {
     }),
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      filename: 'hello-world.html',
-      chunks: ['hello-world'],
+      filename: 'hello-world-page.html',
+      chunks: ['hello-world-page'],
       title: 'Hello world',
       description: 'Hello World',
       template: 'src/index.hbs',
       minify: false,
     }),
     new HtmlWebpackPlugin({
-      filename: 'kiwi.html',
-      chunks: ['kiwi'],
+      filename: 'kiwi-page.html',
+      chunks: ['kiwi-page'],
       title: 'Kiwi',
       description: 'Kiwi',
       template: 'src/index.hbs',

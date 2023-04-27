@@ -240,6 +240,13 @@ module.exports = {
   ],
 ```
 
+## Extract Common dependencies while code splitting
+
+- sometimes, different pages depend on some common library
+- which we do not need to include in each and every generated bundle
+- to prevent duplicate code in different bundles
+- example lodash lib will be extracted as a separate bundle and imported into the html of bundles that uses it
+
 ## Single Page Application
 
 #### Run in Development Mode
