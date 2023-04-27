@@ -162,6 +162,34 @@ module.exports = {
       },
 ```
 
+## Production vs Development mode
+
+- differentiate prod and dev config
+- add a devServer from `webpack-dev-server`
+- change script command in package.json
+- `hot` in dev enables hot module replacement, a great feature supported out of the box
+
+```json
+    "build": "webpack --config webpack.production.config.js",
+    "dev": "webpack serve --config webpack.dev.config.js --hot"
+```
+
+```js
+module.exports = {
+  mode: 'development',
+  devServer: {
+    port: 9000,
+    static: {
+      directory: path.resolve(__dirname, './dist'),
+    },
+    devMiddleware: {
+      index: 'index.html',
+      writeToDisk: true,
+    },
+  },
+};
+```
+
 ## Branches
 
 There are 2 special branches that you may want to check out:

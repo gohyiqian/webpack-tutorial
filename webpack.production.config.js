@@ -1,5 +1,4 @@
 const path = require('path');
-const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -10,39 +9,8 @@ module.exports = {
     filename: 'bundle.[contenthash].js',
     path: path.resolve(__dirname, './dist'),
     publicPath: '',
-    // clean: {
-    //   dry: true,
-    // },
   },
-  // mode: 'none',
-  mode: 'development',
-  // mode: 'production',
-  //   module: {
-  //     rules: [
-  //       {
-  //         test: /\.(png|jpg)$/,
-  //         type: 'asset/resource',
-  //       },
-  //     ],
-  //   },
-
-  //   module: {
-  //     rules: [
-  //       {
-  //         test: /\.(png|jpg)$/,
-  //         type: 'asset/inline',
-  //       },
-  //     ],
-  //   },
-
-  //   module: {
-  //     rules: [
-  //       {
-  //         test: /\.(png|jpg)$/,
-  //         type: 'asset',
-  //       },
-  //     ],
-  //   },
+  mode: 'production',
   module: {
     rules: [
       {
@@ -50,7 +18,7 @@ module.exports = {
         type: 'asset',
         parser: {
           dataUrlCondition: {
-            maxSize: 3 * 1024, // 3 kilobytes
+            maxSize: 3 * 1024,
           },
         },
       },
@@ -60,13 +28,10 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        // use: ['style-loader', 'css-loader'],
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
       {
         test: /\.scss$/,
-        //webpack will read the loader from right to left
-        // use: ['style-loader', 'css-loader', 'sass-loader'],
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
       },
       {
@@ -87,24 +52,14 @@ module.exports = {
     ],
   },
   plugins: [
-    new TerserPlugin(),
     new MiniCssExtractPlugin({
       filename: 'styles.[contenthash].css',
     }),
-    new CleanWebpackPlugin({
-      cleanOnceBeforeBuildPatterns: [
-        '**/*',
-        path.join(process.cwd(), 'build/**/*'),
-      ],
-    }),
+    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      title: 'Kenji App',
-      // filename: 'subfolder/custom_filename.html',
+      title: 'Hello world',
       template: 'src/index.hbs',
-      description: 'Some description',
-      // meta: {
-      //   description: 'Some description',
-      // },
+      description: 'some description',
     }),
   ],
 };
