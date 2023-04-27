@@ -149,6 +149,19 @@ module.exports = {
 };
 ```
 
+## Template Engine Option
+
+- create own template for generating HTML files
+- There are plenty of template engines such as `ejs`, `handlebars` etc
+- using `handlebars`
+
+```js
+      {
+        test: /\.hbs$/,
+        use: ['handlebars-loader'],
+      },
+```
+
 ## Branches
 
 There are 2 special branches that you may want to check out:

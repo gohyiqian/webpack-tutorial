@@ -79,6 +79,10 @@ module.exports = {
           },
         },
       },
+      {
+        test: /\.hbs$/,
+        use: ['handlebars-loader'],
+      },
     ],
   },
   plugins: [
@@ -95,9 +99,11 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'Kenji App',
       // filename: 'subfolder/custom_filename.html',
-      meta: {
-        description: 'Some description',
-      },
+      template: 'src/index.hbs',
+      description: 'Some description',
+      // meta: {
+      //   description: 'Some description',
+      // },
     }),
   ],
 };
