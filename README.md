@@ -117,6 +117,38 @@ module.exports = {
 };
 ```
 
+- Alternatively we can use default `clean` method
+- if we set `dry:true`, webpack will inform you which files it is going to remove instead of actually removing them
+- `keep` tells webpack which file to keep
+
+```js
+  output: {
+    filename: 'bundle.[contenthash]js',
+    path: path.resolve(__dirname, './dist'),
+    publicPath: 'dist/',
+    clean: {
+      dry: true,
+      keep: /\.css/
+    },
+  },
+```
+
+## Auto-generate HTML files with the hash
+
+```js
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+module.exports = {
+  plugins: [
+    new CleanWebpackPlugin({
+      cleanOnceBeforeBuildPatterns: [
+        '**/*',
+        path.join(process.cwd(), 'build/**/*'),
+      ],
+    }),
+  ],
+};
+```
+
 ## Branches
 
 There are 2 special branches that you may want to check out:

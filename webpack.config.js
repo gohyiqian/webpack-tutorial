@@ -7,9 +7,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   entry: './src/index.js',
   output: {
-    filename: 'bundle.[contenthash]js',
+    filename: 'bundle.[contenthash].js',
     path: path.resolve(__dirname, './dist'),
-    publicPath: 'dist/',
+    publicPath: '',
+    // clean: {
+    //   dry: true,
+    // },
   },
   mode: 'none',
 
@@ -89,6 +92,12 @@ module.exports = {
         path.join(process.cwd(), 'build/**/*'),
       ],
     }),
-    new HtmlWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      title: 'Kenji App',
+      // filename: 'subfolder/custom_filename.html',
+      meta: {
+        description: 'Some description',
+      },
+    }),
   ],
 };
