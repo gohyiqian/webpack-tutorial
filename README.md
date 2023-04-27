@@ -210,6 +210,36 @@ module.exports = {
 };
 ```
 
+## Generate separate HTML file for separate bundles
+
+- this example uses handlebar template engine
+- update webpack prod config as such:
+
+```js
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: '[name].[contenthash].css',
+    }),
+    new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      filename: 'hello-world.html',
+      chunks: ['hello-world'],
+      title: 'Hello world',
+      description: 'Hello World',
+      template: 'src/page-template.hbs',
+      minify: false,
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'kiwi.html',
+      chunks: ['kiwi'],
+      title: 'Kiwi',
+      description: 'Kiwi',
+      template: 'src/page-template.hbs',
+      minify: false,
+    }),
+  ],
+```
+
 ## Single Page Application
 
 #### Run in Development Mode
