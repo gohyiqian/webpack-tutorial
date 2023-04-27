@@ -83,6 +83,40 @@ plugins: [
 ],
 ```
 
+## Browser Caching
+
+- `browser location`: if the file didnt change between page reloads, your browser can save it as `cache`, so it does not need to download again
+- however, we need a mechanism to update the cache if not browser will keep fetching the outdate cache
+- we can use add a `MD5 hash` to the filename example `bundle.[contenthash].js` or `styles.[contenthash].css`
+
+```js
+output: {
+  filename: 'bundle.[contenthash].js',
+  path: path.resolve(__dirname, './dist'),
+  publicPath: 'dist/',
+},
+```
+
+## Bundle Maintenance
+
+- new bundles are created everytime the code gets updated and build
+- we can use a webpack plugin to maintain it
+
+```js
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+
+module.exports = {
+  plugins: [
+    new CleanWebpackPlugin({
+      cleanOnceBeforeBuildPatterns: [
+        '**/*',
+        path.join(process.cwd(), 'build/**/*'),
+      ],
+    }),
+  ],
+};
+```
+
 ## Branches
 
 There are 2 special branches that you may want to check out:
